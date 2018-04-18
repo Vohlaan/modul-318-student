@@ -1,0 +1,45 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SwissTransport"
+        xmlns:SBBurkhardt_GUI="clr-namespace:SBBurkhardt_GUI" x:Class="SwissTransport.MainWindow"
+        mc:Ignorable="d"
+        Title="SBBurkhardt" Height="445.385" Width="658.846">
+    <Grid>
+        <TabControl x:Name="tabs" IsSynchronizedWithCurrentItem="True">
+            <TabItem x:Name="tabVerbindung" Header="Verbindungen" IsSelected="True" IsHitTestVisible="True">
+                <Grid Background="#FFE5E5E5">
+                    <DatePicker x:Name="dateBox" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="158"/>
+                    <Button Content="Ab" HorizontalAlignment="Left" Margin="258,60,0,0" VerticalAlignment="Top" Width="45" Height="24"/>
+                    <Button Content="Bis" HorizontalAlignment="Left" Margin="303,60,0,0" VerticalAlignment="Top" Width="45" Height="24"/>
+                    <ListBox x:Name="gridConnections" HorizontalAlignment="Left" Height="287" Margin="10,89,0,0" VerticalAlignment="Top" Width="204"/>
+                    <ListBox x:Name="gridConnection" HorizontalAlignment="Left" Height="268" Margin="257,108,0,0" VerticalAlignment="Top" Width="204"/>
+                    <Label x:Name="Verbindung" Content="Label" HorizontalAlignment="Left" Margin="257,84,0,0" VerticalAlignment="Top" Width="49"/>
+                    <Button Content="Verbindung per Mail senden" Margin="471,356,10,10"/>
+                    <Label Content="Stationstafel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="353,60,0,0" TextWrapping="Wrap" Text="Zeit" VerticalAlignment="Top" Width="63"/>
+                    <SBBurkhardt_GUI:SearchComboBox x:Name="fromStation" HorizontalAlignment="Left" Height="22" Margin="10,33,0,0" VerticalAlignment="Top" Width="215" Loaded="SearchComboBox_Loaded"/>
+                    <SBBurkhardt_GUI:SearchComboBox x:Name="toStation" HorizontalAlignment="Left" Height="23" Margin="257,32,0,0" VerticalAlignment="Top" Width="213"/>
+                    <Button x:Name="btnShowConnections" Content="Zeige Verbindung" HorizontalAlignment="Left" Margin="470,32,0,0" VerticalAlignment="Top" Width="165" Click="btnShowConnections_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabStation" Header="Station">
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="Stationstafel" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Button Content="Diese Station auf Google Maps anzeigen!" HorizontalAlignment="Left" Margin="10,356,0,0" VerticalAlignment="Top" Width="226"/>
+                    <SBBurkhardt_GUI:SearchComboBox x:Name="searchBoard" HorizontalAlignment="Left" Height="20" Margin="10,26,0,0" VerticalAlignment="Top" Width="310"/>
+                    <Button x:Name="btnShowBoard" Content="Abfahrtstafel Zeigen" HorizontalAlignment="Left" Margin="325,26,0,0" VerticalAlignment="Top" Width="120" Click="showBoard_Click"/>
+                    <ListBox ItemsSource="{Binding Path=entryTable}" HorizontalAlignment="Left" Height="300" Margin="10,51,0,0" VerticalAlignment="Top" Width="625" >
+
+
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabCloseStations" Header="Stationen in meiner Nähe">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

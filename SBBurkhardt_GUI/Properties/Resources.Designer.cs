@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SBBurkhardt_GUI.Properties
+namespace SwissTransport.Properties
 {
 
 
