@@ -14,9 +14,9 @@
                     <DatePicker x:Name="dateBox" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="158"/>
                     <Button Content="Ab" HorizontalAlignment="Left" Margin="258,60,0,0" VerticalAlignment="Top" Width="45" Height="24"/>
                     <Button Content="Bis" HorizontalAlignment="Left" Margin="303,60,0,0" VerticalAlignment="Top" Width="45" Height="24"/>
-                    <ListBox x:Name="gridConnections" HorizontalAlignment="Left" Height="287" Margin="10,89,0,0" VerticalAlignment="Top" Width="204"/>
-                    <ListBox x:Name="gridConnection" HorizontalAlignment="Left" Height="268" Margin="257,108,0,0" VerticalAlignment="Top" Width="204"/>
-                    <Label x:Name="Verbindung" Content="Label" HorizontalAlignment="Left" Margin="257,84,0,0" VerticalAlignment="Top" Width="49"/>
+                    <ListBox x:Name="lbConnections" HorizontalAlignment="Left" Height="287" Margin="10,89,0,0" VerticalAlignment="Top" Width="204"/>
+                    <ListBox x:Name="lbConnection" HorizontalAlignment="Left" Height="268" Margin="257,108,0,0" VerticalAlignment="Top" Width="204"/>
+                    <Label Content="Verbindung" HorizontalAlignment="Left" Margin="257,84,0,0" VerticalAlignment="Top" Width="49"/>
                     <Button Content="Verbindung per Mail senden" Margin="471,356,10,10"/>
                     <Label Content="Stationstafel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
                     <TextBox HorizontalAlignment="Left" Height="23" Margin="353,60,0,0" TextWrapping="Wrap" Text="Zeit" VerticalAlignment="Top" Width="63"/>

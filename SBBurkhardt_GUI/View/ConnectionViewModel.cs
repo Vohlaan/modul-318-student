@@ -9,9 +9,17 @@ namespace SBBurkhardt_GUI.View
 {
     class ConnectionViewModel
     {
+        //List<Connection> tableConnectionList;
+
         public void showConnections(Station fromStation, Station toStation)
         {
+            
             Transport t = new Transport();
+            Connections connectionList = t.GetConnections(fromStation.Id, toStation.Id);
+            foreach(Connection connection in connectionList.ConnectionList)
+            {
+                //tableConnectionList.Add(connection);
+            }
         }
     }
 }

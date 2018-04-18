@@ -12,6 +12,7 @@ namespace SBBurkhardt_GUI.View
 {
     class BoardViewModel : INotifyPropertyChanged
     {
+
         private StationBoardRoot _currentStation;
         public StationBoardRoot currentStation
         {

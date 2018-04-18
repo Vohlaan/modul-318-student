@@ -45,7 +45,6 @@ namespace SBBurkhardt_GUI
                     stationNames.Add(station.Name);
                 });
                 cboxSearch.ItemsSource = stationNames;
-
                 
             }
         }
