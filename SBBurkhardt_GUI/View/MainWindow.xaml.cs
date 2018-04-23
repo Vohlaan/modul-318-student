@@ -21,10 +21,14 @@ namespace SwissTransport
     /// </summary>
     public partial class MainWindow : Window
     {
+        ConnectionViewModel Cvm { get; set; }
+        BoardViewModel Bvm { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
-            
+            Cvm = new ConnectionViewModel();
+            Bvm = new BoardViewModel();
         }
 
         private void btnShowBoard_Click(object sender, RoutedEventArgs e)
@@ -38,16 +42,17 @@ namespace SwissTransport
             (this.DataContext as ConnectionViewModel).showConnections(fromStation.selectedStation, toStation.selectedStation);
         }
 
+
         private void tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             e.Handled = true;
             if (tabVerbindung.IsSelected)
             {
-                this.DataContext = new ConnectionViewModel();
+                this.DataContext = Cvm;
             }
             else if (tabStation.IsSelected)
             {
-                this.DataContext = new BoardViewModel();
+                this.DataContext = Bvm;
             }
             else if (tabCloseStations.IsSelected)
             {
@@ -55,21 +60,38 @@ namespace SwissTransport
             }
         }
 
-        private void lbConnections_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            e.Handled = true;
-            (this.DataContext as ConnectionViewModel).selectedConnection = (Connection)lbConnections.SelectedItem;
-            (this.DataContext as ConnectionViewModel).showConnectionPoints();
-        }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            e.Handled = true;
-        }
+
+
 
         private void btnShowMap_Click(object sender, RoutedEventArgs e)
         {
             (this.DataContext as BoardViewModel).showMap();
+        }
+
+        private void lvConnections_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((Connection)lvConnections.SelectedItem != null)
+            {
+                (this.DataContext as ConnectionViewModel).selectedConnection = (Connection)lvConnections.SelectedItem;
+                (this.DataContext as ConnectionViewModel).showConnectionPoints();
+            }
+            
+        }
+
+        private void lvConnectionPoints_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void lvStationBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void btnSendMail_Click(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as ConnectionViewModel).sendMail();
         }
     }
 }

@@ -72,6 +72,10 @@
     <Compile Include="SearchComboBox.xaml.cs">
       <DependentUpon>SearchComboBox.xaml</DependentUpon>
     </Compile>
+    <Page Include="TimeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +83,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeControl.xaml.cs">
+      <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BoardViewModel.cs" />
     <Compile Include="View\ConnectionViewModel.cs" />

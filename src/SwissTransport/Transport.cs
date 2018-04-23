@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 
@@ -25,7 +26,7 @@ namespace SwissTransport
 
         public StationBoardRoot GetStationBoard(string station, string id)
         {
-            var request = CreateWebRequest("http://transport.opendata.ch/v1/stationboard?Station=" + station + "&id=" + id);
+            var request = CreateWebRequest("http://transport.opendata.ch/v1/stationboard?station=" + station + "&id=" + id);
             var response = request.GetResponse();
             var responseStream = response.GetResponseStream();
 
@@ -43,6 +44,32 @@ namespace SwissTransport
         public Connections GetConnections(string fromStation, string toStattion)
         {
             var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?from=" + fromStation + "&to=" + toStattion);
+            var response = request.GetResponse();
+            var responseStream = response.GetResponseStream();
+
+            if (responseStream != null)
+            {
+                var readToEnd = new StreamReader(responseStream).ReadToEnd();
+                var connections =
+                    JsonConvert.DeserializeObject<Connections>(readToEnd);
+                return connections;
+            }
+
+            return null;
+        }
+
+        public Connections GetConnections(string fromStation, string toStattion, DateTime dateTime, bool isArrivalTime)
+        {
+            string date = dateTime.ToString("yyyy-MM-dd");
+            string time = dateTime.ToString("hh:mm");
+
+            int _isArrivalTime;
+            if (isArrivalTime)
+                _isArrivalTime = 1;
+            else
+                _isArrivalTime = 0;
+
+            var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?from=" + fromStation + "&to=" + toStattion + "&date=" + date + "&time=" + time + "&isArrivalTime=" + _isArrivalTime);
             var response = request.GetResponse();
             var responseStream = response.GetResponseStream();
 

@@ -11,11 +11,9 @@
         <TabControl x:Name="tabs" IsSynchronizedWithCurrentItem="True" SelectionChanged="tabs_SelectionChanged">
             <TabItem x:Name="tabVerbindung" Header="Verbindungen" IsSelected="True" IsHitTestVisible="True">
                 <Grid Background="#FFE5E5E5">
-                    <DatePicker x:Name="dateBox" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="158"/>
-                    <Button Content="Ab" HorizontalAlignment="Left" Margin="258,60,0,0" VerticalAlignment="Top" Width="45" Height="24"/>
-                    <Button Content="Bis" HorizontalAlignment="Left" Margin="303,60,0,0" VerticalAlignment="Top" Width="45" Height="24"/>
+                    <DatePicker x:Name="dateBox" DisplayDate="{Binding Path=connectionDate}" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="158"/>
 
-                    <ListView x:Name="lbConnections" ItemsSource="{Binding connectionsList}" HorizontalAlignment="Left" Margin="10,89,0,10" Width="204" SelectionChanged="lbConnections_SelectionChanged">
+                    <ListView x:Name="lvConnections" ItemsSource="{Binding connectionsList}" Margin="10,89,0,10" SelectionChanged="lvConnections_SelectionChanged" HorizontalAlignment="Left" Width="204">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=From.Departure}" Header="Abfahrt">
@@ -24,12 +22,18 @@
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=Duration}" Header="Reisezeit">
 
                                 </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=To.Arrival}" Header="Ankunft">
+
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=To.Delay}" Header="Verspätung">
+
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
 
 
-                    <ListView x:Name="lbConnectionPoints" ItemsSource="{Binding connectionPoints}" HorizontalAlignment="Left" Margin="257,108,0,10" Width="204">
+                    <ListView x:Name="lvConnectionPoints" ItemsSource="{Binding connectionPoints}" Margin="257,108,0,10" SelectionChanged="lvConnectionPoints_SelectionChanged" HorizontalAlignment="Left" Width="204">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=Platform}" Header="Gleis">
@@ -46,12 +50,16 @@
                     </ListView>
 
                     <Label Content="Verbindung" HorizontalAlignment="Left" Margin="257,84,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Verbindung per Mail senden" Margin="0,0,10,10" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="164"/>
+                    <Button x:Name="btnSendMail" Content="Verbindung per Mail senden" Margin="0,0,10,10" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="164" Click="btnSendMail_Click"/>
                     <Label Content="Stationstafel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="353,60,0,0" TextWrapping="Wrap" Text="Zeit" VerticalAlignment="Top" Width="63"/>
+                    <TextBox x:Name="txtTime" HorizontalAlignment="Left" Height="23" Margin="353,60,0,0" TextWrapping="Wrap" Text="{Binding Path=txtTime}" VerticalAlignment="Top" Width="63"/>
                     <SBBurkhardt_GUI:SearchComboBox x:Name="fromStation" HorizontalAlignment="Left" Height="22" Margin="10,33,0,0" VerticalAlignment="Top" Width="215"/>
                     <SBBurkhardt_GUI:SearchComboBox x:Name="toStation" HorizontalAlignment="Left" Height="23" Margin="257,32,0,0" VerticalAlignment="Top" Width="213"/>
-                    <Button x:Name="btnShowConnections" Content="Zeige Verbindung" HorizontalAlignment="Left" Margin="470,32,0,0" VerticalAlignment="Top" Width="165" Click="btnShowConnections_Click"/>
+                    <Button x:Name="btnShowConnections" Content="Zeige Verbindungen" HorizontalAlignment="Left" Margin="470,32,0,0" VerticalAlignment="Top" Width="165" Click="btnShowConnections_Click"/>
+                    <TextBox x:Name="txtEmail" Margin="0,0,10,38" TextWrapping="Wrap" Text="{Binding Path=eMail}" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="164"/>
+                    <Label HorizontalAlignment="Left" Margin="504,295,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Email-Empfänger:" Margin="0,0,33,66" HorizontalAlignment="Right" Width="146" Height="34" VerticalAlignment="Bottom"/>
+                    <CheckBox x:Name="chkArrival" Content="Ankunft" HorizontalAlignment="Left" Margin="261,65,0,0" VerticalAlignment="Top" IsChecked="{Binding Path=isArrivalTime}"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabStation" Header="Station">
@@ -60,7 +68,7 @@
                     <Button x:Name="btnShowMap" Content="Diese Station auf Google Maps anzeigen!" HorizontalAlignment="Left" Margin="10,356,0,0" VerticalAlignment="Top" Width="226" Click="btnShowMap_Click"/>
                     <SBBurkhardt_GUI:SearchComboBox x:Name="searchBoard" HorizontalAlignment="Left" Height="20" Margin="10,26,0,0" VerticalAlignment="Top" Width="310"/>
                     <Button x:Name="btnShowBoard" Content="Abfahrtstafel Zeigen" HorizontalAlignment="Left" Margin="325,26,0,0" VerticalAlignment="Top" Width="120" Click="btnShowBoard_Click"/>
-                    <ListView x:Name="lvStationBoard" ItemsSource="{Binding entryTable}" HorizontalAlignment="Left" Height="300" Margin="10,51,0,0" VerticalAlignment="Top" Width="625" SelectionChanged="ListView_SelectionChanged" >
+                    <ListView x:Name="lvStationBoard" ItemsSource="{Binding entryTable}" HorizontalAlignment="Left" Height="300" Margin="10,51,0,0" VerticalAlignment="Top" Width="625" SelectionChanged="lvStationBoard_SelectionChanged" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=Stop.Departure}" Header="Abfahrtszeit">
