@@ -20,12 +20,19 @@ namespace SBBurkhardt_GUI.View
             set { _currentStation = value; OnPropertyChanged("currentStation"); }
         }
 
-
-        public ObservableCollection<string> entryTable { get; set; }
+        private ObservableCollection<StationBoard> _entryTable = new ObservableCollection<StationBoard>();
+        public ObservableCollection<StationBoard> entryTable
+        {
+            get
+            {
+               return _entryTable;
+            }
+            private set { _entryTable = value; OnPropertyChanged("entryTable"); }
+        }
 
         public BoardViewModel()
         {
-            entryTable = new ObservableCollection<string>();
+            entryTable = new ObservableCollection<StationBoard>() {  };
         }
 
         public void showBoard(Station station)
@@ -37,10 +44,12 @@ namespace SBBurkhardt_GUI.View
 
             foreach(StationBoard entry in currentStation.Entries)
             {
-                string x = entry.Name;
-                entryTable.Add(entry.To);
+                entryTable.Add(entry);
             }
         }
+
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -48,6 +57,13 @@ namespace SBBurkhardt_GUI.View
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void showMap()
+        {
+            double lat = currentStation.Station.Coordinate.XCoordinate;
+            double lng = currentStation.Station.Coordinate.YCoordinate;
+            System.Diagnostics.Process.Start("http://www.google.com/maps/place/" + lat.ToString() + "," + lng.ToString());
         }
     }
 }

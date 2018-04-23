@@ -24,18 +24,52 @@ namespace SwissTransport
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new BoardViewModel();
-            this.DataContext = new ConnectionViewModel();
+            
         }
 
-        private void showBoard_Click(object sender, RoutedEventArgs e)
+        private void btnShowBoard_Click(object sender, RoutedEventArgs e)
         {
             (this.DataContext as BoardViewModel).showBoard(searchBoard.selectedStation);
+            
         }
 
         private void btnShowConnections_Click(object sender, RoutedEventArgs e)
         {
             (this.DataContext as ConnectionViewModel).showConnections(fromStation.selectedStation, toStation.selectedStation);
+        }
+
+        private void tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+            if (tabVerbindung.IsSelected)
+            {
+                this.DataContext = new ConnectionViewModel();
+            }
+            else if (tabStation.IsSelected)
+            {
+                this.DataContext = new BoardViewModel();
+            }
+            else if (tabCloseStations.IsSelected)
+            {
+
+            }
+        }
+
+        private void lbConnections_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+            (this.DataContext as ConnectionViewModel).selectedConnection = (Connection)lbConnections.SelectedItem;
+            (this.DataContext as ConnectionViewModel).showConnectionPoints();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void btnShowMap_Click(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as BoardViewModel).showMap();
         }
     }
 }

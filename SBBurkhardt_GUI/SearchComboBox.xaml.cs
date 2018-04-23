@@ -21,6 +21,9 @@ namespace SBBurkhardt_GUI
     /// </summary>
     public partial class SearchComboBox : UserControl
     {
+        
+        //Sobald eine Station ausgewählt ist, wird selectedStation festgelegt.
+        //selectedStation ist ein Objekt der Klasse Station.
         public Station selectedStation;
 
         private List<Station> stations;
@@ -30,31 +33,35 @@ namespace SBBurkhardt_GUI
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ITransport t = new Transport();
-
-            if (!string.IsNullOrEmpty(cboxSearch.Text))
-            {
-                stations = t.GetStations(cboxSearch.Text).StationList; //Liste mit Vorschlägen
-
-                List<string> stationNames = new List<string>();
-
-                stations.ForEach (delegate (Station station) 
-                {
-                    stationNames.Add(station.Name);
-                });
-                cboxSearch.ItemsSource = stationNames;
-                
-            }
-        }
-
         private void cboxSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (stations != null && cboxSearch.SelectedIndex > 0)
             {
-                Station stationToCheck = stations[cboxSearch.SelectedIndex];
-                selectedStation = stationToCheck;
+                selectedStation = stations[cboxSearch.SelectedIndex];
+            }
+        }
+
+        private void cboxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            cboxSearch.IsDropDownOpen = true;
+            getStationList();
+        }
+
+        ITransport t = new Transport();
+        private void getStationList()
+        {
+            stations = t.GetStations(cboxSearch.Text).StationList; //Liste mit Vorschlägen
+
+            List<string> stationNames = new List<string>();
+
+            stations.ForEach(delegate (Station station)
+            {
+                stationNames.Add(station.Name);
+            });
+            cboxSearch.ItemsSource = stationNames;
+            if (stations != null && cboxSearch.SelectedIndex > -1)
+            {
+                selectedStation = stations[cboxSearch.SelectedIndex];
             }
         }
     }
