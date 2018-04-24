@@ -25,9 +25,6 @@
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=To.Arrival}" Header="Ankunft">
 
                                 </GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=To.Delay}" Header="Verspätung">
-
-                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>

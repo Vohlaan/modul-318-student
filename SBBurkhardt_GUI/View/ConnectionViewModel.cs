@@ -134,6 +134,8 @@ namespace SBBurkhardt_GUI.View
                     SmtpServer.EnableSsl = true;
 
                     SmtpServer.Send(msg);
+                    MessageBox.Show("Email Versandt!");
+                    eMail = "";
                 }
 
                 catch
@@ -146,7 +148,7 @@ namespace SBBurkhardt_GUI.View
         // Open Google Maps with Connections between both selected stations.
         public void showConnectionMap()
         {
-            if (connectionPoints != null)
+            if (selectedConnection != null)
             {
                 double latFrom = connectionPoints[1].Station.Coordinate.XCoordinate;
                 double lngFrom = connectionPoints[1].Station.Coordinate.YCoordinate;
