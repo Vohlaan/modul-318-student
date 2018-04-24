@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using SwissTransport;
 using SBBurkhardt_GUI.Common;
+using System.Net.NetworkInformation;
 
 namespace SBBurkhardt_GUI.View
 {
@@ -22,6 +23,17 @@ namespace SBBurkhardt_GUI.View
 
         public ConnectionViewModel()
         {
+            bool pingable = false;
+            Ping pinger = new Ping();
+            try
+            {
+                PingReply reply = pinger.Send("transport.opendata.ch");
+                pingable = reply.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+                MessageBox.Show("Can't connect to Opendata. I suggest you try again later.");
+            }
             connectionsList = new ObservableCollection<Connection>();
             connectionPoints = new ObservableCollection<ConnectionPoint>();
             connectionDate = DateTime.Now;
