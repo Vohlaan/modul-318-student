@@ -62,7 +62,6 @@ namespace SwissTransport
         {
             string date = dateTime.ToString("yyyy-MM-dd");
             string time = dateTime.ToString("hh:mm");
-
             int _isArrivalTime;
             if (isArrivalTime)
                 _isArrivalTime = 1;

@@ -30,40 +30,45 @@ namespace SBBurkhardt_GUI.View
             private set { _entryTable = value; OnPropertyChanged("entryTable"); }
         }
 
-        public BoardViewModel()
-        {
-            entryTable = new ObservableCollection<StationBoard>() {  };
-        }
-
-        public void showBoard(Station station)
-        {
-            entryTable.Clear();
-
-            Transport t = new Transport();
-            currentStation = t.GetStationBoard(station.Name, station.Id);
-
-            foreach(StationBoard entry in currentStation.Entries)
-            {
-                entryTable.Add(entry);
-            }
-        }
-
-
-
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public BoardViewModel()
+        {
+            entryTable = new ObservableCollection<StationBoard>() {  };
+        }
+        
+        // Show Stationboard of selected Station
+        public void showBoard(Station station)
+        {
+            if ( station!= null)
+            {
+                entryTable.Clear();
+
+                Transport t = new Transport();
+                currentStation = t.GetStationBoard(station.Name, station.Id);
+
+                foreach (StationBoard entry in currentStation.Entries)
+                {
+                    entryTable.Add(entry);
+                }
+            }
+        }
+
+        // Show Google-Map with marker on selected Location.
         public void showMap()
         {
-            double lat = currentStation.Station.Coordinate.XCoordinate;
-            double lng = currentStation.Station.Coordinate.YCoordinate;
-            System.Diagnostics.Process.Start("http://www.google.com/maps/place/" + lat.ToString() + "," + lng.ToString());
+            if (currentStation != null)
+            {
+                double lat = currentStation.Station.Coordinate.XCoordinate;
+                double lng = currentStation.Station.Coordinate.YCoordinate;
+                System.Diagnostics.Process.Start("http://www.google.com/maps/place/" + lat.ToString() + "," + lng.ToString());
+            }
+            
         }
     }
 }

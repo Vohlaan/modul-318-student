@@ -28,20 +28,36 @@ namespace SwissTransport
         {
             InitializeComponent();
             Cvm = new ConnectionViewModel();
+            this.DataContext = Cvm;
             Bvm = new BoardViewModel();
         }
 
         private void btnShowBoard_Click(object sender, RoutedEventArgs e)
         {
-            (this.DataContext as BoardViewModel).showBoard(searchBoard.selectedStation);
-            
+            if (searchBoard.selectedStation != null)
+            {
+                (this.DataContext as BoardViewModel).showBoard(searchBoard.selectedStation);
+            }
         }
-
         private void btnShowConnections_Click(object sender, RoutedEventArgs e)
         {
-            (this.DataContext as ConnectionViewModel).showConnections(fromStation.selectedStation, toStation.selectedStation);
+            if (fromStation.selectedStation != null && toStation.selectedStation != null)
+            {
+                (this.DataContext as ConnectionViewModel).showConnections(fromStation.selectedStation, toStation.selectedStation);
+            }
         }
-
+        private void btnSendMail_Click(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as ConnectionViewModel).sendMail();
+        }
+        private void btnShowConnectionMap_Click(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as ConnectionViewModel).showConnectionMap();
+        }
+        private void btnShowMap_Click(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as BoardViewModel).showMap();
+        }
 
         private void tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -56,17 +72,8 @@ namespace SwissTransport
             }
             else if (tabCloseStations.IsSelected)
             {
-
+                
             }
-        }
-
-
-
-
-
-        private void btnShowMap_Click(object sender, RoutedEventArgs e)
-        {
-            (this.DataContext as BoardViewModel).showMap();
         }
 
         private void lvConnections_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -78,20 +85,15 @@ namespace SwissTransport
             }
             
         }
-
         private void lvConnectionPoints_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             e.Handled = true;
         }
-
         private void lvStationBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             e.Handled = true;
         }
 
-        private void btnSendMail_Click(object sender, RoutedEventArgs e)
-        {
-            (this.DataContext as ConnectionViewModel).sendMail();
-        }
+
     }
 }

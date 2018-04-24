@@ -52,7 +52,7 @@
                     <Label Content="Verbindung" HorizontalAlignment="Left" Margin="257,84,0,0" VerticalAlignment="Top" Width="75"/>
                     <Button x:Name="btnSendMail" Content="Verbindung per Mail senden" Margin="0,0,10,10" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="164" Click="btnSendMail_Click"/>
                     <Label Content="Stationstafel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
-                    <TextBox x:Name="txtTime" HorizontalAlignment="Left" Height="23" Margin="353,60,0,0" TextWrapping="Wrap" Text="{Binding Path=txtTime}" VerticalAlignment="Top" Width="63"/>
+                    <TextBox x:Name="txtTime" HorizontalAlignment="Left" Height="23" Margin="353,60,0,0" TextWrapping="Wrap" Text="{Binding Path=connectionTime}" VerticalAlignment="Top" Width="63"/>
                     <SBBurkhardt_GUI:SearchComboBox x:Name="fromStation" HorizontalAlignment="Left" Height="22" Margin="10,33,0,0" VerticalAlignment="Top" Width="215"/>
                     <SBBurkhardt_GUI:SearchComboBox x:Name="toStation" HorizontalAlignment="Left" Height="23" Margin="257,32,0,0" VerticalAlignment="Top" Width="213"/>
                     <Button x:Name="btnShowConnections" Content="Zeige Verbindungen" HorizontalAlignment="Left" Margin="470,32,0,0" VerticalAlignment="Top" Width="165" Click="btnShowConnections_Click"/>
@@ -60,6 +60,7 @@
                     <Label HorizontalAlignment="Left" Margin="504,295,0,0" VerticalAlignment="Top"/>
                     <Label Content="Email-Empfänger:" Margin="0,0,33,66" HorizontalAlignment="Right" Width="146" Height="34" VerticalAlignment="Bottom"/>
                     <CheckBox x:Name="chkArrival" Content="Ankunft" HorizontalAlignment="Left" Margin="261,65,0,0" VerticalAlignment="Top" IsChecked="{Binding Path=isArrivalTime}"/>
+                    <Button x:Name="btnShowConnectionMap" Content="Verbindung online anzeigen" HorizontalAlignment="Left" Margin="470,261,0,0" VerticalAlignment="Top" Width="164" Click="btnShowConnectionMap_Click"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabStation" Header="Station">
